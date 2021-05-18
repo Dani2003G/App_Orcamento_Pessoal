@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Normalize -->
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+
+    <!-- Script js -->
+    <script src="js/app.js"></script>
+
+    <!-- HTML5Shiv -->
+    <!--[if lt IE 9]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+    <title>Orçamento pessoal</title>
+
+  </head>
+  <body onload="CarregaListaDespesas()">
+
+        <!-- Start header -->
+        <header class="pb-3">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container">
+                    <!-- Start brand -->
+                    <a class="navbar-brand" href="">
+                        <img src="logo.png">
+                    </a>
+                    <!-- End brand -->
+
+                    <!-- Start hamburguer button -->
+                    <button class="navbar-toggler" data-bs-toggle='collapse' data-bs-target='#BarraPrincipal' type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- End hamburguer button -->
+
+                    <!-- Start ´main navegation bar -->
+                    <div class="collapse navbar-collapse" id="BarraPrincipal">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Cadastro</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="consulta.html">Consulta</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End main navegation bar -->
+                </div>
+            </nav>
+        </header>
+        <!-- Start header -->
+
+        <!-- Start personal record -->
+        <section class="container pb-3">
+            <div>
+                <h1 class="display-4">Consulta de despesas</h1>
+            </div>
+        </section>
+        <!-- End personal record -->
+
+        <!-- Start information section part 1 -->
+        <section class="container pb-2">
+            <div class="row">
+                <!-- Start year -->
+                <div class="col-md-2">
+                    <select class="form-select" id="Ano">
+                        <option value="">Ano</option>
+                        <option value="2018">2018</option>
+                    </select>
+                </div>
+                <!-- End year -->
+
+                <!-- Start month -->
+                <div class="col-md-2">
+                    <select class="form-select" id="Mes">
+                        <option value="">Mês</option>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+                <!-- End month -->
+
+                <!-- Start day -->
+                <div class="col-md-2">
+                    <input class="form-control" type="text" placeholder="Dia" id="Dia">
+                </div>
+                <!-- End day -->
+
+                <!-- Start month -->
+                <div class="col-md-6">
+                    <select class="form-select" id="Tipo">
+                        <option value="">Tipo</option>
+                        <option value="1">Alimentação</option>
+                        <option value="2">Educação</option>
+                        <option value="3">Lazer</option>
+                        <option value="4">Saúde</option>
+                        <option value="5">Transporte</option>
+                    </select>
+                </div>
+                <!-- End month -->
+            </div>
+        </section>
+        <!-- End information section part 1 -->
+
+        <!-- Start information section part 2 -->
+        <section class="container mb-5">
+            <div class="row">
+                <!-- Start description -->
+                <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Descrição" id="Descricao">
+                </div>
+                <!-- End description -->
+
+                <!-- Start value -->
+                <div class="col-md-2">
+                    <input class="form-control" type="text" placeholder="Valor" id="Valor">
+                </div>
+                <!-- End value -->
+
+                <!-- Start search button -->
+                <div class="col-md-2 d-flex justify-content-end">
+                    <button onclick="PesquisarDespesa()" type="button" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <!-- End search button -->
+            </div>
+        </section>
+        <!-- End information section part 2 -->
+
+        <!-- Start table information section -->
+        <section class="container">
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <tr>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+
+                        <tbody id="ListaDespesas">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal remover despesas -->
+        <div class="modal fade" id="ModalRemoverDespesas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div id="Modal_Titulo_Div">
+                    <h5 class="modal-title" id="Modal_Titulo"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" id="Modal_Conteudo"></div>
+                  <div class="modal-footer">
+                    <button type="button" id="Modal_Btn1" data-bs-dismiss="modal"></button>
+                    <button type="button" id="Modal_Btn2" data-bs-dismiss="modal" value="Remover"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+        <!-- Jquery -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+        
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+    -->
+
+  </body>
+</html>
