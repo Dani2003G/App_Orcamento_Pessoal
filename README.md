@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="gif/app_orcamento_pessoal.gif">
+    <img src="gif/app_orcamento_pessoal.gif"> <br>
     <figcaption>Aplicativo em execução</figcaption>
 </h1>
 
